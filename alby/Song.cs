@@ -49,7 +49,11 @@ namespace Alby
 
         public void Play()
         {
-            if (soundOut != null && soundOut.PlaybackState == PlaybackState.Playing)
+            if (soundOut == null)
+            {
+                MessageBox.Show("You haven't loaded a file yet!");
+            }
+            else if (soundOut.PlaybackState == PlaybackState.Playing)
             {
                 soundOut.Pause();
             }

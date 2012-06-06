@@ -32,6 +32,7 @@ namespace Alby
         {
             song.Stop();
             positionTrackbar.Value = 0;
+            timeDisplay.Text = "00:00:00";
         }
 
         private void Scroll_PositionTrackbar(object sender, EventArgs e)
@@ -41,17 +42,20 @@ namespace Alby
 
         private void Update_Trackbar()
         {
-            if (song.soundOut.PlaybackState == PlaybackState.Playing)
+            if (song.soundOut != null)
             {
-                timerTrackbar.Start();
-            }
-            if (song.soundOut.PlaybackState == PlaybackState.Paused)
-            {
-                timerTrackbar.Stop();
-            }
-            if (song.soundOut.PlaybackState == PlaybackState.Stopped)
-            {
-                timerTrackbar.Stop();
+                if (song.soundOut.PlaybackState == PlaybackState.Playing)
+                {
+                    timerTrackbar.Start();
+                }
+                if (song.soundOut.PlaybackState == PlaybackState.Paused)
+                {
+                    timerTrackbar.Stop();
+                }
+                if (song.soundOut.PlaybackState == PlaybackState.Stopped)
+                {
+                    timerTrackbar.Stop();
+                }
             }
         }
 
