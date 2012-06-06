@@ -8,5 +8,4 @@ C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\Gene
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\alby.exe
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\alby.pdb
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.dll
-C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.WindowsMediaFormat.dll
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.xml
