@@ -41,32 +41,45 @@
             // 
             // openFile
             // 
-            this.openFile.Location = new System.Drawing.Point(1, 0);
+            this.openFile.BackColor = System.Drawing.Color.Green;
+            this.openFile.FlatAppearance.BorderSize = 0;
+            this.openFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.openFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openFile.ForeColor = System.Drawing.Color.White;
+            this.openFile.Location = new System.Drawing.Point(2, 4);
             this.openFile.Name = "openFile";
-            this.openFile.Size = new System.Drawing.Size(89, 72);
+            this.openFile.Size = new System.Drawing.Size(89, 68);
             this.openFile.TabIndex = 0;
             this.openFile.Text = "Open";
-            this.openFile.UseVisualStyleBackColor = true;
+            this.openFile.UseVisualStyleBackColor = false;
             this.openFile.Click += new System.EventHandler(this.onClickOpen);
             // 
             // Play
             // 
-            this.Play.Location = new System.Drawing.Point(96, 0);
+            this.Play.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.Play.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Play.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Play.ForeColor = System.Drawing.Color.White;
+            this.Play.Location = new System.Drawing.Point(97, 4);
             this.Play.Name = "Play";
-            this.Play.Size = new System.Drawing.Size(75, 37);
+            this.Play.Size = new System.Drawing.Size(88, 36);
             this.Play.TabIndex = 1;
             this.Play.Text = "Play";
-            this.Play.UseVisualStyleBackColor = true;
+            this.Play.UseVisualStyleBackColor = false;
             this.Play.Click += new System.EventHandler(this.Play_Click);
             // 
             // Stop
             // 
-            this.Stop.Location = new System.Drawing.Point(189, 1);
+            this.Stop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.Stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Stop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Stop.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Stop.Location = new System.Drawing.Point(191, 4);
             this.Stop.Name = "Stop";
             this.Stop.Size = new System.Drawing.Size(88, 36);
             this.Stop.TabIndex = 2;
             this.Stop.Text = "Stop";
-            this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.UseVisualStyleBackColor = false;
             this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // positionTrackbar
@@ -91,7 +104,7 @@
             // timeDisplay
             // 
             this.timeDisplay.AutoSize = true;
-            this.timeDisplay.Location = new System.Drawing.Point(229, 40);
+            this.timeDisplay.Location = new System.Drawing.Point(229, 42);
             this.timeDisplay.Name = "timeDisplay";
             this.timeDisplay.Size = new System.Drawing.Size(43, 13);
             this.timeDisplay.TabIndex = 5;
@@ -101,6 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(288, 75);
             this.Controls.Add(this.timeDisplay);
             this.Controls.Add(this.positionTrackbar);
