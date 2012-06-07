@@ -112,9 +112,9 @@
             this.timeDisplay.AutoSize = true;
             this.timeDisplay.Location = new System.Drawing.Point(217, 44);
             this.timeDisplay.Name = "timeDisplay";
-            this.timeDisplay.Size = new System.Drawing.Size(43, 13);
+            this.timeDisplay.Size = new System.Drawing.Size(49, 13);
             this.timeDisplay.TabIndex = 5;
-            this.timeDisplay.Text = "0:00:00";
+            this.timeDisplay.Text = "00:00:00";
             // 
             // volumeTrackBar
             // 
