@@ -17,27 +17,48 @@ namespace Alby
 
         private void onClickOpen(object sender, EventArgs e)
         {
-            song.Open();
-            positionTrackbar.Maximum = song.returnSongLength();
-            Update_Trackbar();
+            song.Open(volumeTrackBar.Value);
+            if (song.soundOut != null)
+            {
+                positionTrackbar.Maximum = song.returnSongLength();
+                positionTrackbar.Enabled = true;
+                Update_Trackbar();
+            }
         }
 
         private void Play_Click(object sender, EventArgs e)
         {
-            song.Play();
-            Update_Trackbar();
+            song.Play(volumeTrackBar.Value);
+            if (song.soundOut != null)
+            {
+                positionTrackbar.Enabled = true;
+                Update_Trackbar();
+            }
         }
 
         private void Stop_Click(object sender, EventArgs e)
         {
             song.Stop();
+            positionTrackbar.Enabled = false;
             positionTrackbar.Value = 0;
             timeDisplay.Text = "00:00:00";
         }
 
         private void Scroll_PositionTrackbar(object sender, EventArgs e)
         {
-            song.setSongPosition(positionTrackbar.Value);
+            if (song.soundOut != null)
+            {
+                song.setSongPosition(positionTrackbar.Value);
+            }
+            else
+            {
+                positionTrackbar.Enabled = false;
+            }
+        }
+
+        private void volumeTrackBar_Scroll(object sender, EventArgs e)
+        {
+            song.UpdateVolume(volumeTrackBar.Value);
         }
 
         private void Update_Trackbar()
@@ -67,11 +88,31 @@ namespace Alby
             timeDisplay.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", currentTime.Hours, currentTime.Minutes, currentTime.Seconds);
         }
 
+        private void volumeMute_Click(object sender, EventArgs e)
+        {
+            if (song.soundOut != null)
+            {
+                if (song.returnVolume() != 0)
+                {
+                    song.UpdateVolume(0);
+                    volumeMute.ForeColor = System.Drawing.Color.Red;
+                }
+                else
+                {
+                    song.UpdateVolume(volumeTrackBar.Value);
+                    volumeMute.ForeColor = System.Drawing.Color.White;
+                }
+            }
+        }
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            song.soundOut.Dispose();
-            song.mp3Reader.Close();
-            song.mp3Reader.Dispose();
+            if (song.soundOut != null)
+            {
+                song.soundOut.Dispose();
+                song.mp3Reader.Close();
+                song.mp3Reader.Dispose();
+            }
             Application.Exit();
         }
     }

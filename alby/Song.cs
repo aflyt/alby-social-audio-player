@@ -15,7 +15,7 @@ namespace Alby
         WaveChannel32 volume;
 
 
-        public void Open()
+        public void Open(int currentVolume)
         {
             soundOut = new WaveOut();
 
@@ -39,28 +39,22 @@ namespace Alby
                 soundOut.Init(mainSoundOut);
 
                 Form1.ActiveForm.Text = Path.GetFileName(filename);
-                Play();
-            }
-            else
-            {
-                MessageBox.Show("Couldn't play file!");
+                Play(currentVolume);
             }
         }
 
-        public void Play()
+        public void Play(int currentVolume)
         {
-            if (soundOut == null)
-            {
-                MessageBox.Show("You haven't loaded a file yet!");
-            }
-            else if (soundOut.PlaybackState == PlaybackState.Playing)
-            {
-                soundOut.Pause();
-            }
-            else
-            {
-                soundOut.Play();
-            }
+            if (soundOut != null)
+                if (soundOut.PlaybackState == PlaybackState.Playing)
+                {
+                    soundOut.Pause();
+                }
+                else
+                {
+                    UpdateVolume(currentVolume);
+                    soundOut.Play();
+                }
         }
 
         public void Stop()
@@ -71,10 +65,26 @@ namespace Alby
                 setSongPosition(0);
             }
         }
+
+        public void UpdateVolume(int newVolume)
+        {
+            if (soundOut != null)
+            {
+                mainSoundOut.Volume = (float)newVolume / 100;
+            }
+            
+        }
         
         public int returnSongLength()
         {
-            return (int)mp3Reader.TotalTime.TotalSeconds;
+            if (mp3Reader == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return (int)mp3Reader.TotalTime.TotalSeconds;
+            }
         }
 
         public void setSongPosition(int trackbarValue)
@@ -88,6 +98,11 @@ namespace Alby
         public int returnSongPosition()
         {
             return (int)mp3Reader.CurrentTime.TotalSeconds;
+        }
+
+        public float returnVolume()
+        {
+            return mainSoundOut.Volume;
         }
     }
 }
