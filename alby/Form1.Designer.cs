@@ -1,6 +1,6 @@
 ﻿namespace Alby
 {
-    partial class Form1
+    partial class mainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -144,7 +144,7 @@
             this.volumeMute.UseVisualStyleBackColor = false;
             this.volumeMute.Click += new System.EventHandler(this.volumeMute_Click);
             // 
-            // Form1
+            // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -159,7 +159,7 @@
             this.Controls.Add(this.openFile);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "mainWindow";
             this.Text = "alby - Love Music";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.positionTrackbar)).EndInit();

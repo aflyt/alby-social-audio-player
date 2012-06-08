@@ -6,11 +6,11 @@ using NAudio.Wave;
 
 namespace Alby
 {
-    public partial class Form1 : Form
+    public partial class mainWindow : Form
     {
         Song song = new Song();
 
-        public Form1()
+        public mainWindow()
         {
             InitializeComponent();
         }
@@ -59,6 +59,11 @@ namespace Alby
         private void volumeTrackBar_Scroll(object sender, EventArgs e)
         {
             song.UpdateVolume(volumeTrackBar.Value);
+
+            if (volumeMute.ForeColor == System.Drawing.Color.Red)
+            {
+                volumeMute.ForeColor = System.Drawing.Color.White;
+            }
         }
 
         private void Update_Trackbar()

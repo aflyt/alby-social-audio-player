@@ -1,7 +1,6 @@
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\alby.exe
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\alby.pdb
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\Alby.Form1.resources
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\Alby.Properties.Resources.resources
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\GenerateResource.write.1.tlog
@@ -9,3 +8,4 @@ C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\alby
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\alby.pdb
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.dll
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.xml
+C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\Alby.mainWindow.resources

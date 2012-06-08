@@ -6,14 +6,13 @@ using NAudio.Wave;
 
 namespace Alby
 {
-    class Song
+    class Song : Album
     {
         public String filename;
         public IWavePlayer soundOut;
         public WaveStream mp3Reader;
         WaveChannel32 mainSoundOut;
         WaveChannel32 volume;
-
 
         public void Open(int currentVolume)
         {
@@ -38,7 +37,7 @@ namespace Alby
                 mainSoundOut = new WaveChannel32(mp3Reader);
                 soundOut.Init(mainSoundOut);
 
-                Form1.ActiveForm.Text = Path.GetFileName(filename);
+                mainWindow.ActiveForm.Text = Path.GetFileName(filename);
                 Play(currentVolume);
             }
         }
@@ -54,6 +53,7 @@ namespace Alby
                 {
                     UpdateVolume(currentVolume);
                     soundOut.Play();
+                    Id3v2Tag tag = Id3v2Tag.ReadTag(mp3Reader);
                 }
         }
 
