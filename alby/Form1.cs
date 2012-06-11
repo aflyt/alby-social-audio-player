@@ -44,18 +44,20 @@ namespace Alby
                 Play.Text = "Play";
             }
 
-            if (song.IsMuted() == true)
+            if (song.soundOut != null)
             {
-                song.Play(0);
-            }
-            else
-            {
-                if (song.soundOut != null)
+                if (song.IsMuted() == true)
+                {
+                    song.Play(0);
+                    Update_Trackbar();
+                }
+                else
                 {
                     song.Play(volumeTrackBar.Value);
                     Update_Trackbar();
                 }
             }
+
             positionTrackbar.Enabled = true;
         }
 

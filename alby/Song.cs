@@ -154,9 +154,12 @@ namespace Alby
 
         public void CloseSong()
         {
+            if (soundOut != null)
+            {
                 mainSoundOut.Dispose();
                 soundOut.Dispose();
                 mp3Reader.Dispose();
+            }
         }
     }
 }
