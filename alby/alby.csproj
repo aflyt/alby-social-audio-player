@@ -34,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="IdSharp.AudioInfo">
+      <HintPath>..\..\..\..\..\Downloads\Libraries\judwhite-IdSharp-3927fa6\judwhite-IdSharp-3927fa6\IdSharp.AudioInfo\bin\Release\IdSharp.AudioInfo.dll</HintPath>
+    </Reference>
+    <Reference Include="IdSharp.Common">
+      <HintPath>..\..\..\..\..\Downloads\Libraries\judwhite-IdSharp-3927fa6\judwhite-IdSharp-3927fa6\IdSharp.Tagging\bin\Release\IdSharp.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="IdSharp.Tagging">
+      <HintPath>..\..\..\..\..\Downloads\Libraries\judwhite-IdSharp-3927fa6\judwhite-IdSharp-3927fa6\IdSharp.Tagging\bin\Release\IdSharp.Tagging.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\NAudio.1.5\NAudio.dll</HintPath>
@@ -82,6 +91,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

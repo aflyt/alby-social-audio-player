@@ -55,7 +55,7 @@
             this.openFile.TabIndex = 0;
             this.openFile.Text = "Open";
             this.openFile.UseVisualStyleBackColor = false;
-            this.openFile.Click += new System.EventHandler(this.onClickOpen);
+            this.openFile.Click += new System.EventHandler(this.Open_Click);
             // 
             // Play
             // 
@@ -105,7 +105,7 @@
             // 
             // timerTrackbar
             // 
-            this.timerTrackbar.Tick += new System.EventHandler(this.songTime_Tick);
+            this.timerTrackbar.Tick += new System.EventHandler(this.SongTime_Tick);
             // 
             // timeDisplay
             // 
@@ -126,7 +126,7 @@
             this.volumeTrackBar.TabIndex = 6;
             this.volumeTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
             this.volumeTrackBar.Value = 50;
-            this.volumeTrackBar.Scroll += new System.EventHandler(this.volumeTrackBar_Scroll);
+            this.volumeTrackBar.Scroll += new System.EventHandler(this.VolumeTrackBar_Scroll);
             // 
             // volumeMute
             // 
@@ -142,7 +142,7 @@
             this.volumeMute.TabIndex = 7;
             this.volumeMute.Text = "X";
             this.volumeMute.UseVisualStyleBackColor = false;
-            this.volumeMute.Click += new System.EventHandler(this.volumeMute_Click);
+            this.volumeMute.Click += new System.EventHandler(this.VolumeMute_Click);
             // 
             // mainWindow
             // 

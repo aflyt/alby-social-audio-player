@@ -15,25 +15,48 @@ namespace Alby
             InitializeComponent();
         }
 
-        private void onClickOpen(object sender, EventArgs e)
+        private void Open_Click(object sender, EventArgs e)
         {
             song.Open(volumeTrackBar.Value);
+
             if (song.soundOut != null)
             {
-                positionTrackbar.Maximum = song.returnSongLength();
+                if (song.IsMuted() == true)
+                {
+                    song.UpdateVolume(0);
+                }
+
+                positionTrackbar.Maximum = song.ReturnSongLength();
                 positionTrackbar.Enabled = true;
+                Play.Text = "Pause";
                 Update_Trackbar();
             }
         }
 
         private void Play_Click(object sender, EventArgs e)
         {
-            song.Play(volumeTrackBar.Value);
-            if (song.soundOut != null)
+            if (song.ReturnPlaybackState() == PlaybackState.Paused)
             {
-                positionTrackbar.Enabled = true;
-                Update_Trackbar();
+                Play.Text = "Pause";
             }
+            if (song.ReturnPlaybackState() == PlaybackState.Playing)
+            {
+                Play.Text = "Play";
+            }
+
+            if (song.IsMuted() == true)
+            {
+                song.Play(0);
+            }
+            else
+            {
+                if (song.soundOut != null)
+                {
+                    song.Play(volumeTrackBar.Value);
+                    Update_Trackbar();
+                }
+            }
+            positionTrackbar.Enabled = true;
         }
 
         private void Stop_Click(object sender, EventArgs e)
@@ -42,13 +65,19 @@ namespace Alby
             positionTrackbar.Enabled = false;
             positionTrackbar.Value = 0;
             timeDisplay.Text = "00:00:00";
+
+            if (song.IsMuted() == true)
+            {
+                song.Mute(volumeTrackBar.Value);
+                UpdateMute_Colour();
+            }
         }
 
         private void Scroll_PositionTrackbar(object sender, EventArgs e)
         {
             if (song.soundOut != null)
             {
-                song.setSongPosition(positionTrackbar.Value);
+                song.SetSongPosition(positionTrackbar.Value);
             }
             else
             {
@@ -56,13 +85,14 @@ namespace Alby
             }
         }
 
-        private void volumeTrackBar_Scroll(object sender, EventArgs e)
+        private void VolumeTrackBar_Scroll(object sender, EventArgs e)
         {
             song.UpdateVolume(volumeTrackBar.Value);
-
-            if (volumeMute.ForeColor == System.Drawing.Color.Red)
+            
+            if (song.IsMuted() == true)
             {
-                volumeMute.ForeColor = System.Drawing.Color.White;
+                song.Mute(volumeTrackBar.Value);
+                UpdateMute_Colour();
             }
         }
 
@@ -70,54 +100,53 @@ namespace Alby
         {
             if (song.soundOut != null)
             {
-                if (song.soundOut.PlaybackState == PlaybackState.Playing)
+                if (song.ReturnPlaybackState() == PlaybackState.Playing)
                 {
                     timerTrackbar.Start();
                 }
-                if (song.soundOut.PlaybackState == PlaybackState.Paused)
+                if (song.ReturnPlaybackState() == PlaybackState.Paused)
                 {
                     timerTrackbar.Stop();
                 }
-                if (song.soundOut.PlaybackState == PlaybackState.Stopped)
+                if (song.ReturnPlaybackState() == PlaybackState.Stopped)
                 {
                     timerTrackbar.Stop();
                 }
             }
         }
 
-        private void songTime_Tick(object sender, EventArgs e)
+        private void SongTime_Tick(object sender, EventArgs e)
         {
-            positionTrackbar.Value = song.returnSongPosition();
+            positionTrackbar.Value = song.ReturnSongPosition();
             TimeSpan currentTime = TimeSpan.FromSeconds(song.mp3Reader.CurrentTime.TotalSeconds);
 
             timeDisplay.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", currentTime.Hours, currentTime.Minutes, currentTime.Seconds);
         }
 
-        private void volumeMute_Click(object sender, EventArgs e)
+        private void VolumeMute_Click(object sender, EventArgs e)
         {
             if (song.soundOut != null)
             {
-                if (song.returnVolume() != 0)
-                {
-                    song.UpdateVolume(0);
-                    volumeMute.ForeColor = System.Drawing.Color.Red;
-                }
-                else
-                {
-                    song.UpdateVolume(volumeTrackBar.Value);
-                    volumeMute.ForeColor = System.Drawing.Color.White;
-                }
+                song.Mute(volumeTrackBar.Value);
+                UpdateMute_Colour();
+            }
+        }
+
+        private void UpdateMute_Colour()
+        {
+            if (song.IsMuted() == true)
+            {
+                volumeMute.ForeColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                volumeMute.ForeColor = System.Drawing.Color.White;
             }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (song.soundOut != null)
-            {
-                song.soundOut.Dispose();
-                song.mp3Reader.Close();
-                song.mp3Reader.Dispose();
-            }
+            song.CloseSong();
             Application.Exit();
         }
     }

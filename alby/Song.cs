@@ -3,23 +3,23 @@ using System.IO;
 using System.Windows.Forms;
 using NAudio;
 using NAudio.Wave;
+using IdSharp.AudioInfo;
+using IdSharp.Common;
+using IdSharp.Tagging.ID3v2;
+using IdSharp.Tagging.ID3v1;
 
 namespace Alby
 {
     class Song : Album
     {
-        public String filename;
+        protected String filename;
+        protected Boolean muted;
         public IWavePlayer soundOut;
         public WaveStream mp3Reader;
-        WaveChannel32 mainSoundOut;
-        WaveChannel32 volume;
-
+        public WaveChannel32 mainSoundOut;
+        
         public void Open(int currentVolume)
         {
-            soundOut = new WaveOut();
-
-            volume = mainSoundOut;
-
             OpenFileDialog input = new OpenFileDialog();
             input.Filter = ".mp3 files (*.mp3)|*.mp3|.ogg files (*.ogg)|*.ogg|All files (*.*)|*.*";
 
@@ -27,12 +27,15 @@ namespace Alby
 
             if (input.ShowDialog() == DialogResult.OK)
             {
-                if (soundOut != null && soundOut.PlaybackState == PlaybackState.Playing)
+                if (soundOut != null)
                 {
                     Stop();
+                    CloseSong();
                 }
 
                 filename = input.FileName;
+
+                soundOut = new WaveOut();
                 mp3Reader = new Mp3FileReader(filename);
                 mainSoundOut = new WaveChannel32(mp3Reader);
                 soundOut.Init(mainSoundOut);
@@ -53,8 +56,27 @@ namespace Alby
                 {
                     UpdateVolume(currentVolume);
                     soundOut.Play();
-                    Id3v2Tag tag = Id3v2Tag.ReadTag(mp3Reader);
                 }
+        }
+
+        public PlaybackState ReturnPlaybackState()
+        {
+            if (soundOut != null)
+            {
+                if (soundOut.PlaybackState == PlaybackState.Playing)
+                {
+                    return PlaybackState.Playing;
+                }
+                else if (soundOut.PlaybackState == PlaybackState.Paused)
+                {
+                    return PlaybackState.Paused;
+                }
+                else
+                {
+                    return PlaybackState.Stopped;
+                }
+            }
+            return 0;
         }
 
         public void Stop()
@@ -62,7 +84,7 @@ namespace Alby
             if (soundOut != null)
             {
                 soundOut.Stop();
-                setSongPosition(0);
+                SetSongPosition(0);
             }
         }
 
@@ -72,10 +94,40 @@ namespace Alby
             {
                 mainSoundOut.Volume = (float)newVolume / 100;
             }
-            
         }
-        
-        public int returnSongLength()
+
+        public float ReturnVolume()
+        {
+            return mainSoundOut.Volume;
+        }
+
+        public void Mute(int currentVolume)
+        {
+            if (IsMuted() == false)
+            {
+                muted = true;
+                mainSoundOut.Volume = 0;
+            }
+            else
+            {
+                muted = false;
+                UpdateVolume(currentVolume);
+            }
+        }
+
+        public bool IsMuted()
+        {
+            if (muted == false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public int ReturnSongLength()
         {
             if (mp3Reader == null)
             {
@@ -87,7 +139,7 @@ namespace Alby
             }
         }
 
-        public void setSongPosition(int trackbarValue)
+        public void SetSongPosition(int trackbarValue)
         {
             if (mp3Reader != null)
             {
@@ -95,14 +147,16 @@ namespace Alby
             }
         }
 
-        public int returnSongPosition()
+        public int ReturnSongPosition()
         {
             return (int)mp3Reader.CurrentTime.TotalSeconds;
         }
 
-        public float returnVolume()
+        public void CloseSong()
         {
-            return mainSoundOut.Volume;
+                mainSoundOut.Dispose();
+                soundOut.Dispose();
+                mp3Reader.Dispose();
         }
     }
 }
