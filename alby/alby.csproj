@@ -34,15 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="IdSharp.AudioInfo">
-      <HintPath>..\..\..\..\..\Downloads\Libraries\judwhite-IdSharp-3927fa6\judwhite-IdSharp-3927fa6\IdSharp.AudioInfo\bin\Release\IdSharp.AudioInfo.dll</HintPath>
-    </Reference>
-    <Reference Include="IdSharp.Common">
-      <HintPath>..\..\..\..\..\Downloads\Libraries\judwhite-IdSharp-3927fa6\judwhite-IdSharp-3927fa6\IdSharp.Tagging\bin\Release\IdSharp.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="IdSharp.Tagging">
-      <HintPath>..\..\..\..\..\Downloads\Libraries\judwhite-IdSharp-3927fa6\judwhite-IdSharp-3927fa6\IdSharp.Tagging\bin\Release\IdSharp.Tagging.dll</HintPath>
-    </Reference>
     <Reference Include="NAudio, Version=1.5.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libraries\NAudio.1.5\NAudio.dll</HintPath>
@@ -57,15 +48,18 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="taglib-sharp">
+      <HintPath>..\..\..\..\..\Downloads\Libraries\taglib-sharp-2.0.4.0-windows\taglib-sharp-2.0.4.0-windows\Libraries\taglib-sharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Album.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Library.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Song.cs" />

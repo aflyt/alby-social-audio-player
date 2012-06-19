@@ -3,65 +3,51 @@ using System.IO;
 using System.Windows.Forms;
 using NAudio;
 using NAudio.Wave;
-using IdSharp.AudioInfo;
-using IdSharp.Common;
-using IdSharp.Tagging.ID3v2;
-using IdSharp.Tagging.ID3v1;
+using TagLib.Mpeg;
 
 namespace Alby
 {
-    class Song : Album
+    class Song
     {
-        protected String filename;
-        protected Boolean muted;
-        public IWavePlayer soundOut;
-        public WaveStream mp3Reader;
-        public WaveChannel32 mainSoundOut;
-        
-        public void Open(int currentVolume)
+        private String artistName;
+        private String songTitle;
+        private String albumTitle;
+
+        public float volume;
+        private Boolean isMuted = false;
+
+        private IWavePlayer soundOut;
+        private WaveStream mp3Reader;
+        private WaveChannel32 mainSoundOut;
+
+        public void Play(String filename)
         {
-            OpenFileDialog input = new OpenFileDialog();
-            input.Filter = ".mp3 files (*.mp3)|*.mp3|.ogg files (*.ogg)|*.ogg|All files (*.*)|*.*";
-
-            input.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-
-            if (input.ShowDialog() == DialogResult.OK)
+            if (filename != null)
             {
-                if (soundOut != null)
+                if (ReturnSongLoaded() == false)
                 {
-                    Stop();
-                    CloseSong();
+                    soundOut = new WaveOut();
+                    mp3Reader = new Mp3FileReader(filename);
+                    mainSoundOut = new WaveChannel32(mp3Reader);
+                    soundOut.Init(mainSoundOut);
+                    SetSongInfo(filename);
                 }
 
-                filename = input.FileName;
-
-                soundOut = new WaveOut();
-                mp3Reader = new Mp3FileReader(filename);
-                mainSoundOut = new WaveChannel32(mp3Reader);
-                soundOut.Init(mainSoundOut);
-
-                mainWindow.ActiveForm.Text = Path.GetFileName(filename);
-                Play(currentVolume);
-            }
-        }
-
-        public void Play(int currentVolume)
-        {
-            if (soundOut != null)
                 if (soundOut.PlaybackState == PlaybackState.Playing)
                 {
                     soundOut.Pause();
                 }
                 else
                 {
-                    UpdateVolume(currentVolume);
+                    UpdateVolume(ReturnVolume());
                     soundOut.Play();
                 }
+            }
         }
 
         public PlaybackState ReturnPlaybackState()
         {
-            if (soundOut != null)
+            if (ReturnSongLoaded() == true)
             {
                 if (soundOut.PlaybackState == PlaybackState.Playing)
                 {
@@ -81,55 +67,70 @@ namespace Alby
 
         public void Stop()
         {
-            if (soundOut != null)
+            if (ReturnSongLoaded() == true)
             {
                 soundOut.Stop();
                 SetSongPosition(0);
             }
         }
 
-        public void UpdateVolume(int newVolume)
+        public void UpdateVolume(float volume)
         {
-            if (soundOut != null)
+            if (ReturnSongLoaded() == true)
             {
-                mainSoundOut.Volume = (float)newVolume / 100;
+                mainSoundOut.Volume = (float)volume / 100;
             }
         }
 
         public float ReturnVolume()
         {
-            return mainSoundOut.Volume;
-        }
-
-        public void Mute(int currentVolume)
-        {
-            if (IsMuted() == false)
+            if (isMuted == true)
             {
-                muted = true;
-                mainSoundOut.Volume = 0;
+                return 0;
             }
             else
             {
-                muted = false;
-                UpdateVolume(currentVolume);
+                return volume;
             }
         }
 
-        public bool IsMuted()
+        public void Mute()
         {
-            if (muted == false)
+            if (isMuted == false)
             {
-                return false;
+                isMuted = true;
+                UpdateVolume(0);
             }
             else
+            {
+                isMuted = false;
+                UpdateVolume(volume);
+            }
+        }
+
+        public bool ReturnIsMuted()
+        {
+            if (isMuted == true)
             {
                 return true;
             }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void SetSongInfo(String filename)
+        {
+            TagLib.File getInfo = TagLib.File.Create(filename);
+            artistName = getInfo.Tag.FirstPerformer;
+            songTitle = getInfo.Tag.Title;
+            albumTitle = getInfo.Tag.Album;
         }
 
         public int ReturnSongLength()
         {
-            if (mp3Reader == null)
+            if (ReturnSongLoaded() == false)
             {
                 return 0;
             }
@@ -141,7 +142,7 @@ namespace Alby
 
         public void SetSongPosition(int trackbarValue)
         {
-            if (mp3Reader != null)
+            if (ReturnSongLoaded() == true)
             {
                 mp3Reader.CurrentTime = TimeSpan.FromSeconds(trackbarValue);
             }
@@ -152,9 +153,31 @@ namespace Alby
             return (int)mp3Reader.CurrentTime.TotalSeconds;
         }
 
+        public bool ReturnSongLoaded()
+        {
+            if (soundOut == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public String ReturnArtist()
+        {
+            return artistName;
+        }
+
+        public String ReturnSongTitle()
+        {
+            return songTitle;
+        }
+
         public void CloseSong()
         {
-            if (soundOut != null)
+            if (ReturnSongLoaded() == true)
             {
                 mainSoundOut.Dispose();
                 soundOut.Dispose();

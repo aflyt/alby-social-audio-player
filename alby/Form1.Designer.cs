@@ -118,6 +118,7 @@
             // 
             // volumeTrackBar
             // 
+            this.volumeTrackBar.BackColor = System.Drawing.Color.White;
             this.volumeTrackBar.LargeChange = 1;
             this.volumeTrackBar.Location = new System.Drawing.Point(213, 64);
             this.volumeTrackBar.Maximum = 100;
@@ -134,7 +135,7 @@
             this.volumeMute.FlatAppearance.BorderSize = 0;
             this.volumeMute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.volumeMute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.volumeMute.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.volumeMute.ForeColor = System.Drawing.Color.White;
             this.volumeMute.Location = new System.Drawing.Point(191, 64);
             this.volumeMute.Margin = new System.Windows.Forms.Padding(0);
             this.volumeMute.Name = "volumeMute";
@@ -157,7 +158,7 @@
             this.Controls.Add(this.Stop);
             this.Controls.Add(this.Play);
             this.Controls.Add(this.openFile);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "mainWindow";
             this.Text = "alby - Love Music";
