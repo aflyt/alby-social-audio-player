@@ -9,8 +9,8 @@ namespace Alby
 {
     class Library
     {
-        protected Dictionary<String, String[,,]> libraryIndex = new Dictionary<String, String[,,]>();
-        
+        Dictionary<String, String[]> libraryIndex = new Dictionary<String, String[]>();
+     
         protected String artist;
         protected String songTitle;
         protected String albumTitle;
@@ -18,7 +18,7 @@ namespace Alby
 
         public Library()
         {
-
+            
         }
 
         public void AddToLibrary(String fileToAdd)
@@ -29,7 +29,6 @@ namespace Alby
         public void IndexFolder()
         {
             String indexLocation = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-
             String[] files = Directory.GetFiles(indexLocation);
 
             foreach (String file in files)
@@ -40,10 +39,9 @@ namespace Alby
                 albumTitle = tempTag.Tag.Album;
                 filename = file;
 
-                if (libraryIndex.ContainsKey(artist))
-                {
-                    //libraryIndex[artist] = [albumTitle,songTitle,filename];
-                }
+                String[] tempSongDetails = new String[3] { songTitle, albumTitle, filename };
+                
+                libraryIndex.Add(artist,tempSongDetails);
             }
         }
     }
