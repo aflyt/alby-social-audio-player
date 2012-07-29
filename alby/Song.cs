@@ -25,32 +25,28 @@ namespace Alby
 
         public void Play(String filename)
         {
-            //Check if filename isn't null ie song is loaded
-            if (filename != null)
+            //Create Waveout instance
+            soundOut = new WaveOut();
+            //Create Mp3FileReader instance to read mp3 file
+            mp3Reader = new Mp3FileReader(filename);
+            //Create soundchannel from mp3Reader instance
+            soundStream = new WaveChannel32(mp3Reader);
+
+            //Init soundOut using soundStream to prepare to play
+            soundOut.Init(soundStream);
+
+            //Call Set SongInfo to retrieve song tag information
+            SetSongInfo(filename);
+
+            //If Song is playing call pause method, if song is paused Update song volume and call play method
+            if (soundOut.PlaybackState == PlaybackState.Playing)
             {
-                //Create Waveout instance
-                soundOut = new WaveOut();
-                //Create Mp3FileReader instance to read mp3 file
-                mp3Reader = new Mp3FileReader(filename);
-                //Create soundchannel from mp3Reader instance
-                soundStream = new WaveChannel32(mp3Reader);
-
-                //Init soundOut using soundStream to prepare to play
-                soundOut.Init(soundStream);
-
-                //Call Set SongInfo to retrieve song tag information
-                SetSongInfo(filename);
-
-                //If Song is playing call pause method, if song is paused Update song volume and call play method
-                if (soundOut.PlaybackState == PlaybackState.Playing)
-                {
-                    soundOut.Pause();
-                }
-                else
-                {
-                    UpdateVolume(ReturnVolume());
-                    soundOut.Play();
-                }
+               soundOut.Pause();
+            }
+            else
+            {
+                UpdateVolume(ReturnVolume());
+                soundOut.Play();
             }
         }
 
