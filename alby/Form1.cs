@@ -39,7 +39,7 @@ namespace Alby
                 if (song.ReturnSongLoaded() == true)
                 {
                     song.Stop();
-                    song.CloseSong();
+                    song.Close();
 
                     song = new Song();
                 }
@@ -204,8 +204,14 @@ namespace Alby
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Run song's close method and quit application
-            song.CloseSong();
+            song.Close();
             Application.Exit();
+        }
+
+        private void content_Click(object sender, EventArgs e)
+        {
+            Content mainContent = new Content();
+            mainContent.Show();
         }
     }
 }

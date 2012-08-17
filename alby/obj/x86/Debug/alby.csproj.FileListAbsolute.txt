@@ -10,3 +10,15 @@ C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.d
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\NAudio.xml
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\obj\x86\Debug\Alby.mainWindow.resources
 C:\Users\Andy\documents\visual studio 2010\Projects\alby\alby\bin\Debug\taglib-sharp.dll
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\alby.exe
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\alby.pdb
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\bin\Debug\alby.exe
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\bin\Debug\alby.pdb
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\bin\Debug\NAudio.dll
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\bin\Debug\NAudio.xml
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\Alby.mainWindow.resources
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\Alby.Properties.Resources.resources
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Andy\Documents\GitHub\alby-social-audio-player\alby\obj\x86\Debug\Alby.Content.resources

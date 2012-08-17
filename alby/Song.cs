@@ -14,7 +14,6 @@ namespace Alby
         private String songTitle;
         private String albumTitle;
 
-
         public float volume;
         private Boolean isMuted = false;
 
@@ -23,7 +22,7 @@ namespace Alby
         private WaveStream mp3Reader;
         private WaveChannel32 soundStream;
 
-        public void Play(String filename)
+        public void Open(String filename)
         {
             //Create Waveout instance
             soundOut = new WaveOut();
@@ -37,14 +36,25 @@ namespace Alby
 
             //Call Set SongInfo to retrieve song tag information
             SetSongInfo(filename);
+        }
 
+        public void Play(String filename)
+        {
             //If Song is playing call pause method, if song is paused Update song volume and call play method
-            if (soundOut.PlaybackState == PlaybackState.Playing)
+            if (soundOut != null)
             {
-               soundOut.Pause();
+                if (soundOut.PlaybackState == PlaybackState.Playing)
+                {
+                    soundOut.Pause();
+                }
+                else
+                {
+                    soundOut.Play();
+                }
             }
             else
             {
+                Open(filename);
                 UpdateVolume(ReturnVolume());
                 soundOut.Play();
             }
@@ -194,7 +204,7 @@ namespace Alby
         }
 
         //If song is loaded, clean up 
-        public void CloseSong()
+        public void Close()
         {
             if (ReturnSongLoaded() == true)
             {

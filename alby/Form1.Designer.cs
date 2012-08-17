@@ -38,6 +38,7 @@
             this.timeDisplay = new System.Windows.Forms.Label();
             this.volumeTrackBar = new System.Windows.Forms.TrackBar();
             this.volumeMute = new System.Windows.Forms.Button();
+            this.content = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.positionTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.volumeTrackBar)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +52,7 @@
             this.openFile.ForeColor = System.Drawing.Color.White;
             this.openFile.Location = new System.Drawing.Point(3, 4);
             this.openFile.Name = "openFile";
-            this.openFile.Size = new System.Drawing.Size(89, 80);
+            this.openFile.Size = new System.Drawing.Size(89, 85);
             this.openFile.TabIndex = 0;
             this.openFile.Text = "Open";
             this.openFile.UseVisualStyleBackColor = false;
@@ -110,9 +111,10 @@
             // timeDisplay
             // 
             this.timeDisplay.AutoSize = true;
-            this.timeDisplay.Location = new System.Drawing.Point(217, 44);
+            this.timeDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timeDisplay.Location = new System.Drawing.Point(217, 47);
             this.timeDisplay.Name = "timeDisplay";
-            this.timeDisplay.Size = new System.Drawing.Size(49, 13);
+            this.timeDisplay.Size = new System.Drawing.Size(57, 13);
             this.timeDisplay.TabIndex = 5;
             this.timeDisplay.Text = "00:00:00";
             // 
@@ -120,7 +122,7 @@
             // 
             this.volumeTrackBar.BackColor = System.Drawing.Color.White;
             this.volumeTrackBar.LargeChange = 1;
-            this.volumeTrackBar.Location = new System.Drawing.Point(213, 64);
+            this.volumeTrackBar.Location = new System.Drawing.Point(220, 66);
             this.volumeTrackBar.Maximum = 100;
             this.volumeTrackBar.Name = "volumeTrackBar";
             this.volumeTrackBar.Size = new System.Drawing.Size(66, 45);
@@ -136,14 +138,30 @@
             this.volumeMute.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.volumeMute.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.volumeMute.ForeColor = System.Drawing.Color.White;
-            this.volumeMute.Location = new System.Drawing.Point(191, 64);
+            this.volumeMute.Location = new System.Drawing.Point(192, 66);
             this.volumeMute.Margin = new System.Windows.Forms.Padding(0);
             this.volumeMute.Name = "volumeMute";
-            this.volumeMute.Size = new System.Drawing.Size(22, 20);
+            this.volumeMute.Size = new System.Drawing.Size(28, 23);
             this.volumeMute.TabIndex = 7;
             this.volumeMute.Text = "X";
             this.volumeMute.UseVisualStyleBackColor = false;
             this.volumeMute.Click += new System.EventHandler(this.VolumeMute_Click);
+            // 
+            // content
+            // 
+            this.content.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.content.FlatAppearance.BorderSize = 0;
+            this.content.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.content.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.content.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.content.Location = new System.Drawing.Point(98, 66);
+            this.content.Margin = new System.Windows.Forms.Padding(0);
+            this.content.Name = "content";
+            this.content.Size = new System.Drawing.Size(88, 23);
+            this.content.TabIndex = 8;
+            this.content.Text = "Content";
+            this.content.UseVisualStyleBackColor = false;
+            this.content.Click += new System.EventHandler(this.content_Click);
             // 
             // mainWindow
             // 
@@ -151,6 +169,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(286, 92);
+            this.Controls.Add(this.content);
             this.Controls.Add(this.volumeMute);
             this.Controls.Add(this.volumeTrackBar);
             this.Controls.Add(this.timeDisplay);
@@ -181,6 +200,7 @@
         public System.Windows.Forms.TrackBar volumeTrackBar;
         private System.Windows.Forms.Button volumeMute;
         private System.Windows.Forms.TrackBar positionTrackbar;
+        private System.Windows.Forms.Button content;
     }
 }
 
